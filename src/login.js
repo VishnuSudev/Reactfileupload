@@ -20,7 +20,9 @@ function Login(){
         }else{
         try {
           
-          await login(Lemail,Lpass);
+          const userc=await login(Lemail,Lpass);
+          localStorage.setItem('Auth', userc.user.uid)
+          navigate('/file')
       } catch {
            alert("Error!");
         }   
@@ -28,10 +30,18 @@ function Login(){
     }
 
 
-    
-        if (user!=null) {
-            navigate('/file')
+    useEffect(() => {
+        let authToken = localStorage.getItem('Auth')
+        console.log(authToken);
+        console.log("hii")
+        if (authToken) {
+                navigate('/file')
         }
+        
+        if (!authToken) {
+            navigate('/Login')
+        }
+    }, []);
     
 
    

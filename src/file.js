@@ -11,7 +11,8 @@ function File(){
     console.log(user);
 
     function Logout(){
-      logout()
+      logout();
+      localStorage.clear();
       navigate("/login")
       
     }
@@ -19,8 +20,10 @@ function File(){
       console.log(user);
     }
     useEffect(() => {
-      if(user!==null){
-           navigate("/login")
+      let authToken = localStorage.getItem('Auth');
+      console.log(authToken);
+      if (!authToken) {
+        navigate('/Login')
     }
     
     },[]);
